@@ -6,10 +6,7 @@ const path = require('path'),
 const getConfig = require('hjs-webpack');
 
 
-const root = resolve(__dirname);
-const src = join(root, 'src');
-const mudules = join(root, 'node_modules');
-const dest = join(root, 'dist');
+
 
 const NODE_ENV = process.env.NODE_ENV;
 const isDev = NODE_ENV === 'development';
@@ -18,6 +15,13 @@ const isDev = NODE_ENV === 'development';
 //                .indexOf('hjs-dev-server') !== -1;
 
 // ...
+
+const root = resolve(__dirname);
+const src = join(root, 'src');
+const mudules = join(root, 'node_modules');
+const dest = join(root, 'dist');
+
+
 var config = getConfig({
   isDev: isDev,
   in: join(src, 'app.js'),
