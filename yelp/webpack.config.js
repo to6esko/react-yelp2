@@ -1,5 +1,6 @@
 const NODE_ENV = process.env.NODE_ENV;
 const dotenv = require('dotenv');
+const isTest = NODE_ENV === 'test';
 
 const webpack = require('webpack');
 const fs      = require('fs');
@@ -101,5 +102,22 @@ config.postcss = [].concat([
 ])
 // END postcss
 
+if (isTest) {
+  config.externals = {
+    'react/lib/ReactContext': true,
+    'react/lib/ExecutionEnvironment': true
+  }
+
+  config.plugins = config.plugins.filter(p => {
+    const name = p.constructor.toString();
+    const fnName = name.match(/^function (.*)\((.*\))/)
+
+    const idx = [
+      'DedupePlugin',
+      'UglifyJsPlugin'
+    ].indexOf(fnName[1]);
+    return idx < 0;
+  })
+}
 
 module.exports = config;
