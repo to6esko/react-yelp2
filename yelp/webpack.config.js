@@ -1,3 +1,6 @@
+const NODE_ENV = process.env.NODE_ENV;
+const dotenv = require('dotenv');
+
 const webpack = require('webpack');
 const fs = require('fs');
 const path = require('path'),
@@ -8,7 +11,7 @@ const getConfig = require('hjs-webpack');
 
 
 
-const NODE_ENV = process.env.NODE_ENV;
+
 const isDev = NODE_ENV === 'development';
 // alternatively, we can use process.argv[1]
 // const isDev = (process.argv[1] || '')
@@ -29,7 +32,32 @@ var config = getConfig({
     clearBeforeBuild: true
 })
 
-const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
+
+const dotEnvVars = dotenv.config();
+const environmentEnv = dotenv.config({
+    path: join(root, 'config', `${NODE_ENV}.config.js`),
+    silent:true,
+});
+const envVariables=Object.assign({},dotEnvVars,environmentEnv);
+
+const defines = Object.keys(envVariables).reduce((memo, key) => {
+    const val = JSON.stringify(envVariables[key]);
+    memo[`__${key.toUpperCase()}__`] = val;
+    return memo;
+}, {
+        __NODE_ENV__: JSON.stringify(NODE_ENV)        
+});
+
+
+
+config.plugins = [
+    new webpack.DefinePlugin(defines)
+].concat(config.plugins);
+
+
+
+
+const cssModulesNames = `${isDev? '[path][name]__[local]__' : ''}[hash:base64:5]`;
 
 const matchCssLoaders = /(^|!)(css-loader)($|!)/;
 
@@ -47,11 +75,11 @@ const newloader = Object.assign({}, cssloader, {
   include: [src],
   loader: cssloader.loader
     .replace(matchCssLoaders,
-    `$1$2?modules&localIdentName=${cssModulesNames}$3`)
+    `$1$2? modules & localIdentName=${cssModulesNames }$3`)
 })
 config.module.loaders.push(newloader);
 cssloader.test =
-  new RegExp(`[^module]${cssloader.test.source}`)
+  new RegExp(`[^module]${cssloader.test.source }`)
 cssloader.loader = newloader.loader
 
 config.postcss = [].concat([
