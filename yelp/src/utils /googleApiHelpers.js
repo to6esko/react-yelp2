@@ -12,4 +12,3 @@ export function searchNearby(google, map, request) {
   });
 }
 
-export default searchNearby;

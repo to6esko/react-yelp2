@@ -14,6 +14,8 @@ export class Container extends React.Component {
             pagination:null
         }
     }
+
+
   onReady(mapProps, map) {
     const {google} = this.props;
     const opts = {
@@ -21,6 +23,8 @@ export class Container extends React.Component {
       radius: '500',
       types: ['cafe']
     }
+
+
     searchNearby(google, map, opts)
       .then((results, pagination) => {
           this.setState({
@@ -30,19 +34,27 @@ export class Container extends React.Component {
       }).catch((status, result) => {
         // There was an error
       })
-  }
+    }
+
+
   render() {
     return (
         <div>     
-            <Map
-          google={this.props.google}        
-          onReady={this.onReady.bind(this)}
-          visible={false}
-          className={styles.wrapper}>
-                {this.state.places.map(place => {
-                    return (<div className={styles.content} key={place.id}>{place.name}</div>)
-                })}
-                </Map>
+            <Map google={this.props.google}
+                onReady={this.onReady.bind(this)}
+                visible={false}
+                calssName={styles.wrapper}>
+                
+                <Header />
+                
+            <Sidebar title={'Restourants'}
+                places={this.state.places}/>
+                
+            {this.state.places.map(place => {
+            return (<div key={place.id}>{place.name}</div>)
+            }) }    
+                
+            </Map>
       </div>
     )
   }
