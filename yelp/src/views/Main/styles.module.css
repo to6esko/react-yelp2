@@ -1,3 +1,6 @@
+@import url("../../styles /base.css");
+@import url("../../styles /colors.css");
+@import url("../../styles /queries.css");
 
  @media (--screen-phone-lg) {
     /* applied when the screen is larger */

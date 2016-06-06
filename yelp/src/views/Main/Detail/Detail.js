@@ -4,6 +4,9 @@ import styles from './styles.module.css';
 import classnames from 'classnames';
 
 export class Detail extends React.Component {
+     static childContextTypes = {
+    router: T.object,
+  }
   constructor(props, context) {
     super(props, context)
 
@@ -88,4 +91,4 @@ export class Detail extends React.Component {
   }
 }
 
-export default Detail
+export default Detail;
