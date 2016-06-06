@@ -1,5 +1,6 @@
 
 @import url("../../styles /base.css");
+
 .topbar {
   position: fixed;
   z-index: 10;
@@ -11,8 +12,9 @@
   height: var(--topbar-height);
   line-height:var(--topbar-height);
   color: #fff;
+}
 
-  a {
+ a {
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 1px;
@@ -25,4 +27,3 @@
     top: 0px;
     right: 25px;
   }
-}

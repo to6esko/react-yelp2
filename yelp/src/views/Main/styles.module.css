@@ -1,3 +1,8 @@
+
+ @media (--screen-phone-lg) {
+    /* applied when the screen is larger */
+    flex-direction: column;
+  }
 .wrapper{
     overflow-y: scroll;
     display: flex;
@@ -7,10 +12,26 @@
     height: 100vh;
     -webkit-box-orient: horizontal;
     -o-box-orient: horizontal;
+    
+    /* Added these rules */
+  flex-direction: column;
+  flex: 1;
+  
+  
 }
 
-.content{
-    position:relative;
+
+ @media (--screen-phone-lg) {
     flex: 2;
-    top:80px;
+    order: 2;
+  }
+.content {
+  position: relative;
+  top: var(--topbar-height);
+  left: 0;
+
+  flex: 1;
+  order: 1;
+
+ 
 }
