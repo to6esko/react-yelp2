@@ -2,7 +2,7 @@
 
 .sidebar{
     height: 100%;
-    top:var(--height);
+    top:var(--topbar-height);
     left:0;
     overflow: hidden;
     position:relative;
