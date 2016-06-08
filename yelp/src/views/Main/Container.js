@@ -1,9 +1,9 @@
 import React,{PropTypes as T} from 'react';
 import Map, {GoogleApiWrapper} from 'google-maps-react';
-import {searchNearby} from '../../utils /googleApiHelpers';
-import Header from '../../components /Header/Header';
+import {searchNearby} from '../../utils/googleApiHelpers';
+import Header from '../../components/Header/Header';
 import styles from './styles.module.css'; 
-import Sidebar from '../../components /Sidebar/Sidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 
 export class Container extends React.Component {
