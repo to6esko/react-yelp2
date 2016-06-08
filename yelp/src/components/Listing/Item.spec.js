@@ -17,7 +17,7 @@ describe('<Item/>', () => {
     });
     
     it('contains a title component with yelp', () => {
-        expect(wrapper.find('h1').first().text()).to.equal(pace.name);
+        expect(wrapper.find('h1').first().text()).to.equal(place.name);
     });
     
     it('wraps the component with an .item css class', () => {
