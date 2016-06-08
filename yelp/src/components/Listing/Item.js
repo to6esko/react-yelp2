@@ -8,7 +8,7 @@ export class Item extends React.Component{
         const {place} = this.props;
         return (
             <div className={styles.item}>
-                <h1 className={calssnames(styles.title) }>{place.name}</h1>
+                <h1 className={classnames(styles.title) }>{place.name}</h1>
                 <span>{place.rating/5}</span>
             </div>
         )
